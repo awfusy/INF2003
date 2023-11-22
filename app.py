@@ -7,10 +7,13 @@ import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
 import pymongo
-from prettytable import PrettyTable
-import time
+from dash import Dash, dcc, html, Output
+from dash_table import DataTable
+from dash.dependencies import Input, State
+import pandas as pd
 
 app = Flask(__name__)
+dash_app = Dash(__name__, server=app, url_base_pathname='/dashboard/')
 
 def generate_bar_chart(data, labels):
     # Sort data and labels in descending order
@@ -41,9 +44,7 @@ def generate_bar_chart(data, labels):
 
     return image_base64
 
-
 @app.route('/')
-@app.route('/index.html')
 def index():
     # SSH Configuration
     ssh_host = '35.212.230.135'
@@ -109,10 +110,36 @@ def index():
         client = pymongo.MongoClient("mongodb+srv://INF2003:wJL8pGXxgGQzqhaP@inf2003.xqigi2t.mongodb.net/")
         db = client["INF2003"]  # Replace with your database name
 
-    return render_template('home/index.html', chart_image=chart_image)
+    # Convert the result to a pandas DataFrame
+    df = pd.DataFrame(result, columns=['Product Category', 'Num Orders', 'Revenue'])
 
+    # Dash DataTable
+    dash_app.layout = html.Div([
+        dcc.Graph(
+            id='revenue-bar-chart',
+            figure={
+                'data': [
+                    {'x': chart_labels, 'y': chart_data, 'type': 'bar', 'name': 'Revenue'},
+                ],
+                'layout': {
+                    'title': 'Top 10 Product Categories by Revenue',
+                    'xaxis': {'title': 'Product Category'},
+                    'yaxis': {'title': 'Revenue'},
+                }
+            }
+        ),
+        DataTable(
+            id='datatable',
+            columns=[
+                {'name': 'Product Category', 'id': 'Product Category'},
+                {'name': 'Num Orders', 'id': 'Num Orders'},
+                {'name': 'Revenue', 'id': 'Revenue'},
+            ],
+            data=df.to_dict('records'),
+        )
+    ])
 
-     
+    return render_template('home/index.html', chart_image=chart_image, data=result)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)

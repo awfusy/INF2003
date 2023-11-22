@@ -66,6 +66,8 @@
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="card card-chart">
               <div class="row">
                 <div class="card-body col-6">
                   <div class="chart-area">
@@ -73,6 +75,57 @@
                       <img src="data:image/png;base64,{{ chart_image }}" alt="Bar Chart">
                     <!-- </canvas> -->
                   </div>
+                </div>
+                <div class="card-body col-6">
+                  <!-- Data Table -->
+                  <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Product Category</th>
+                            <th>Num Orders</th>
+                            <th>Revenue</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in data %}
+                            <tr>
+                                <td>{{ row[0] }}</td>
+                                <td>{{ row[1] }}</td>
+                                <td>{{ row[2] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>                  
+                </div>
+              </div>
+            </div>
+            <div class="card card-chart">
+              <div class="row">
+                <div class="card-body col-6">
+                  <h2 class="card-title">Analysis</h2>
+                  <p>SQL:<br/>
+                    SELECT
+                        p.product_category_name,
+                        COUNT(DISTINCT oi.order_id) AS Num_orders,
+                        SUM(oi.price) AS Revenue
+                    FROM
+                        olist_order_items_dataset oi
+                    JOIN
+                        olist_products_dataset p ON oi.product_id = p.product_id
+                    JOIN
+                        olist_orders_dataset o ON oi.order_id = o.order_id
+                    WHERE
+                        o.order_status <> 'canceled'
+                        AND o.order_delivered_customer_date IS NOT NULL
+                    GROUP BY
+                        p.product_category_name
+                    ORDER BY
+                        Revenue DESC;
+                    <br/><br/>
+                    NoSQL:<br/>
+                    <br/><br/>
+                    Technical Analysis:<br/>
+                  </p>
                 </div>
                 <div class="card-body col-6">
                   <h2 class="card-title">Analysis</h2>
@@ -100,121 +153,11 @@
                     Technical Analysis:<br/>
                   </p>
                 </div>
-              </div>              
-            </div>
+              </div>
+            </div> 
           </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-category">Olist Store</h5>
-                <h3 class="card-title">Category with most 5* reviews</h3>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="chartLinePurple"></canvas>
-                </div>
-              </div>
-            </div>
           </div>
-          <div class="col-lg-4">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-category">Olist Store</h5>
-                <h3 class="card-title"> Most popular category by location</h3>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="CountryChart"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-category">Olist Store</h5>
-                <h3 class="card-title">Most bought product category</h3>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="chartLineGreen"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-                <div class="row">
-          <div class="col-lg-4">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-category">Olist Store</h5>
-                <h3 class="card-title">Most prefered payment method</h3>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="chartLinePurple"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-category">Olist Store</h5>
-                <h3 class="card-title"> Average completion of processing/ shipping time</h3>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="CountryChart"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-category">Olist Store</h5>
-                <h3 class="card-title">Category with most sellers</h3>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="chartLineGreen"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-category">Olist Store</h5>
-                <h3 class="card-title">Avg deliver time and freight fee</h3>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="chartLinePurple"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-category">Olist Store</h5>
-                <h3 class="card-title"> Average customer reviews score on categories</h3>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="CountryChart"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        </div>         
       {% include 'includes/footer.html' %}
     </div>
   </div>
