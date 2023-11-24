@@ -13,7 +13,6 @@ from dash.dependencies import Input, State
 import pandas as pd
 
 app = Flask(__name__)
-dash_app = Dash(__name__, server=app, url_base_pathname='/dashboard/')
 
 def generate_bar_chart(data, labels):
     # Sort data and labels in descending order
@@ -109,35 +108,7 @@ def index():
         # Connect to the MongoDB database
         client = pymongo.MongoClient("mongodb+srv://INF2003:wJL8pGXxgGQzqhaP@inf2003.xqigi2t.mongodb.net/")
         db = client["INF2003"]  # Replace with your database name
-
-    # Convert the result to a pandas DataFrame
-    df = pd.DataFrame(result, columns=['Product Category', 'Num Orders', 'Revenue'])
-
-    # Dash DataTable
-    dash_app.layout = html.Div([
-        dcc.Graph(
-            id='revenue-bar-chart',
-            figure={
-                'data': [
-                    {'x': chart_labels, 'y': chart_data, 'type': 'bar', 'name': 'Revenue'},
-                ],
-                'layout': {
-                    'title': 'Top 10 Product Categories by Revenue',
-                    'xaxis': {'title': 'Product Category'},
-                    'yaxis': {'title': 'Revenue'},
-                }
-            }
-        ),
-        DataTable(
-            id='datatable',
-            columns=[
-                {'name': 'Product Category', 'id': 'Product Category'},
-                {'name': 'Num Orders', 'id': 'Num Orders'},
-                {'name': 'Revenue', 'id': 'Revenue'},
-            ],
-            data=df.to_dict('records'),
-        )
-    ])
+    
 
     return render_template('home/index.html', chart_image=chart_image, data=result)
 
