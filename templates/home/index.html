@@ -42,7 +42,7 @@
     </div>
     <div class="main-panel">
         {% include 'includes/nav.html' %}
-      <div class="content">
+      <div class="content bg-dark">
         <div class="row">
           <div class="col-12">
             <div class="card card-chart">
@@ -101,8 +101,8 @@
             </div>
             <div class="card card-chart">
               <div class="row">
-                <div class="card-body col-6">
-                  <h2 class="card-title">Analysis</h2>
+                <h2 class="card-title col-12 d-flex justify-content-center">Analysis</h2>
+                <div class="card-body col-6 text-center">                  
                   <p>SQL:<br/>
                     SELECT
                         p.product_category_name,
@@ -122,39 +122,32 @@
                     ORDER BY
                         Revenue DESC;
                     <br/><br/>
-                    NoSQL:<br/>
-                    <br/><br/>
-                    Technical Analysis:<br/>
+                    Average Time taken to Execute (ms)<br/>
                   </p>
                 </div>
-                <div class="card-body col-6">
-                  <h2 class="card-title">Analysis</h2>
-                  <p>SQL:<br/>
-                    SELECT
-                        p.product_category_name,
-                        COUNT(DISTINCT oi.order_id) AS Num_orders,
-                        SUM(oi.price) AS Revenue
-                    FROM
-                        olist_order_items_dataset oi
-                    JOIN
-                        olist_products_dataset p ON oi.product_id = p.product_id
-                    JOIN
-                        olist_orders_dataset o ON oi.order_id = o.order_id
-                    WHERE
-                        o.order_status <> 'canceled'
-                        AND o.order_delivered_customer_date IS NOT NULL
-                    GROUP BY
-                        p.product_category_name
-                    ORDER BY
-                        Revenue DESC;
+                <div class="card-body col-6 text-center">                  
+                  <p>NoSQL:<br/>
                     <br/><br/>
-                    NoSQL:<br/>
-                    <br/><br/>
-                    Technical Analysis:<br/>
+                    Average Time taken to Execute (ms)<br/>
                   </p>
                 </div>
               </div>
             </div> 
+            <div class="card card-chart">
+              <div class="row">
+                <h2 class="card-title col-12 d-flex justify-content-center">Analysis Result</h2>                
+                <div class="card-body col-6 text-center">
+                  <p>
+                    Insert your MySQL analysis here
+                  </p>                                
+                </div>  
+                <div class="card-body col-6 text-center">
+                  <p>
+                    Insert your NoSQL analysis here
+                  </p>                                
+                </div>              
+              </div>
+            </div>
           </div>
           </div>
         </div>         
