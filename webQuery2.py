@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
 
-def generate_bar_chart(data, labels, title):
+def generate_bar_chart(data, labels, title, x_label='Category', y_label='Revenue'):
     # Sort data and labels in descending order
     sorted_data, sorted_labels = zip(*sorted(zip(data, labels), reverse=True))
 
@@ -15,8 +15,8 @@ def generate_bar_chart(data, labels, title):
     # Adjust font size dynamically based on label length
     font_size = min(8, 200 / max_label_length)  # You can adjust the divisor for fine-tuning
 
-    plt.xlabel('Category', fontsize=font_size)
-    plt.ylabel('Count', fontsize=font_size)
+    plt.xlabel(x_label, fontsize=font_size)
+    plt.ylabel(y_label, fontsize=font_size)
     plt.title(title, fontsize=font_size + 6)  # Increase title font size slightly
     plt.xticks(rotation=20, ha='right', fontsize=font_size)  # Rotate and slant X-axis labels
 

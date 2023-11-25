@@ -77,7 +77,7 @@
                 <div class="card-body col-12">
                   <div class="chart-area d-flex justify-content-center">
                       <!-- <canvas id="chartBig1"> -->
-                      <img id="dynamicChartImage" src="chart_image" alt="Bar Chart">
+                      <img id="dynamicChartImage" src="{{ q1_chart_image }}" alt="Bar Chart">
                       <!-- </canvas> -->
                   </div>
                 </div>                
@@ -287,7 +287,7 @@
           newNosql = '4444444';
           newNosqlTime = '100';
           finalAnalysis='i am alot text';
-          dynamicChartImageBase64 = '{{ chart_image }}'; // add this from app.py result to change image according to case
+          dynamicChartImageBase64 = '{{ q1_chart_image }}'; // add this from app.py result to change image according to case
           break;
         case 'Query 2':
           newText = 'Product category with most in 5* review';
@@ -297,7 +297,7 @@
           newNosql = '66666';
           newNosqlTime = '111';
           finalAnalysis='asdasdasdasda';
-          dynamicChartImageBase64 = '{{ chart_image_reviews }}'; // add this from app.py result to change image according to case
+          dynamicChartImageBase64 = '{{ q2_chart_image }}'; // add this from app.py result to change image according to case
           break;
         case 'Query 3':
           newText = 'Most popular product category by geolocation';
@@ -307,6 +307,7 @@
           newNosql = '4444444';
           newNosqlTime = '100';
           finalAnalysis='i am alot text';
+          dynamicChartImageBase64 = '{{ q3_chart_image }}'; // add this from app.py result to change image according to case
           break;
         case 'Query 4':
           newText = 'Frequently Bought items';
