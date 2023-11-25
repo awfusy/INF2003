@@ -74,36 +74,15 @@
                 </div>
               </div>
               <div class="row">
-                <div class="card-body col-6">
-                  <div class="chart-area">
-                    <!-- <canvas id="chartBig1"> -->
-                      <img src="data:image/png;base64,{{ chart_image }}" alt="Bar Chart">
-                    <!-- </canvas> -->
+                <div class="card-body col-12">
+                  <div class="chart-area d-flex justify-content-center">
+                      <!-- <canvas id="chartBig1"> -->
+                      <img id="dynamicChartImage" src="chart_image" alt="Bar Chart">
+                      <!-- </canvas> -->
                   </div>
-                </div>
-                <div class="card-body col-6">
-                  <!-- Data Table -->
-                  <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Product Category</th>
-                            <th>Num Orders</th>
-                            <th>Revenue</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for row in data %}
-                            <tr>
-                                <td>{{ row[0] }}</td>
-                                <td>{{ row[1] }}</td>
-                                <td>{{ row[2] }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                  </table>                  
-                </div>
+                </div>                
               </div>
-                </div>
+            </div>
             <div class="card card-chart">
               <div class="row">
                 <h2 class="card-title col-12 d-flex justify-content-center">Query comparison</h2>
@@ -148,6 +127,8 @@
                   </p>                                
                 </div>
               </div>
+            </div>
+          </div>                   
             </div>
           </div>
           </div>
@@ -306,6 +287,7 @@
           newNosql = '4444444';
           newNosqlTime = '100';
           finalAnalysis='i am alot text';
+          dynamicChartImageBase64 = '{{ chart_image }}'; // add this from app.py result to change image according to case
           break;
         case 'Query 2':
           newText = 'Product category with most in 5* review';
@@ -315,6 +297,7 @@
           newNosql = '66666';
           newNosqlTime = '111';
           finalAnalysis='asdasdasdasda';
+          dynamicChartImageBase64 = '{{ chart_image_reviews }}'; // add this from app.py result to change image according to case
           break;
         case 'Query 3':
           newText = 'Most popular product category by geolocation';
@@ -398,6 +381,8 @@
       $('.nosql-time').text(newNosqlTime);
       $('.final-analysis').text(finalAnalysis);
 
+      // Set the dynamic chart image source
+      $('#dynamicChartImage').attr('src', 'data:image/png;base64,' + dynamicChartImageBase64);
     });
   });
 </script>
