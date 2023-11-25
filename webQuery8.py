@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
 
-def generate_dual_bar_chart(data1, data2, labels, title, x_label='Metric', y_label1='Average Delivery Time(hours)', y_label2='Average Delivery Fee($)'):
+def generate_chart(data1, data2, labels, title, x_label='Metric', y_label1='Average Delivery Time(hours)', y_label2='Average Delivery Fee($)'):
     # Sort labels in descending order
     sorted_labels = sorted(labels, reverse=True)
 
