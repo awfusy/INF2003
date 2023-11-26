@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
 
-def generate_chart(data, labels, title, x_label='Category', y_label='Revenue'):
+def generate_chart(data, labels, title, x_label='Category', y_label='Count'):
     # Sort data and labels in descending order
     sorted_data, sorted_labels = zip(*sorted(zip(data, labels), reverse=True))
 

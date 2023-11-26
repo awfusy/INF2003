@@ -2,27 +2,33 @@ import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
 
-def generate_chart(data, labels, title, x_label='Category', y_label='Revenue'):
-    # Sort data and labels in descending order
-    sorted_data, sorted_labels = zip(*sorted(zip(data, labels), reverse=True))
+def generate_chart(data, title, x_label='Category', y_label='Revenue'):
+    labels = data['product_category_name']
+    revenue_values = data['Revenue']
+    order_values = data['Num_orders']
 
-    plt.figure(figsize=(8, 6))
-    plt.bar(sorted_labels, sorted_data, color='skyblue')
+    # Sort data and labels based on revenue in descending order
+    sorted_data, sorted_labels = zip(*sorted(zip(revenue_values, labels), reverse=True))
+    sorted_orders = [order_values[labels == label].values[0] for label in sorted_labels]
 
-    # Determine the maximum label length
-    max_label_length = max(len(str(label)) for label in sorted_labels)
+    plt.figure(figsize=(12, 6))
 
-    # Adjust font size dynamically based on label length
-    font_size = min(8, 200 / max_label_length)  # You can adjust the divisor for fine-tuning
+    # Plotting revenue
+    plt.bar(sorted_labels, sorted_data, color='skyblue', label='Revenue')
 
-    plt.xlabel(x_label, fontsize=font_size)
-    plt.ylabel(y_label, fontsize=font_size)
-    plt.title(title, fontsize=font_size + 6)  # Increase title font size slightly
-    plt.xticks(rotation=20, ha='right', fontsize=font_size)  # Rotate and slant X-axis labels
+    # Plotting number of orders as a line plot on the secondary axis
+    ax2 = plt.gca().twinx()
+    ax2.plot(sorted_labels, sorted_orders, color='orange', marker='o', label='Number of Orders')
+
+    plt.xlabel(x_label, fontsize=10)
+    plt.ylabel(y_label, fontsize=10)
+    plt.title(title, fontsize=14)
+    plt.xticks(rotation=45, ha='right', fontsize=8)
+    plt.legend(loc='upper left', bbox_to_anchor=(0.7, 1.0), fontsize=8)
 
     # Save the plot to a BytesIO object
     image_stream = BytesIO()
-    plt.savefig(image_stream, format='png')
+    plt.savefig(image_stream, format='png', bbox_inches='tight')
     image_stream.seek(0)
 
     # Encode the image as base64
