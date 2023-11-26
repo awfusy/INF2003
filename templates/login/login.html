@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            background-color: #F0F2F5;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #FFFFFF;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #CCCCCC;
+            border-radius: 3px;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form method="POST" action="/">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password">
+            </div>
+            <div class="form-group">
+                <button type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+    // Get the username from the login form
+    var username = document.getElementById("username").value;
+
+    // Pass the username to nav.html
+    var navSpan = document.getElementById("username");
+    navSpan.textContent = username;
+</script>
+</html>

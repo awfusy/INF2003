@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Account List</title>
+</head>
+<body>
+    <h1>Account List</h1>
+
+    <table>
+        <tr>
+            <th>user_id</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Staff Role</th>
+            <th>Action</th>
+        </tr>
+        <!-- BEGIN: Loop through retrieved data from the database -->
+        {% for account in accounts %}
+        <tr>            
+                <td><input type="text" name="userid" value="{{ account[0] }}"></td>
+                <td><input type="text" name="username" value="{{ account[1] }}"></td>
+                <td><input type="text" name="password" value="{{ account[2] }}"></td>
+                <td><input type="text" name="staffRole" value="{{ account[3] }}"></td>
+                <td>
+                    <input type="hidden" name="current_userid" value="{{ account[0] }}">
+                    <button type="submit">Update</button>
+                    <form action="{{ url_for('deleteAccount') }}" method="post" style="display: inline;">
+                        <input type="hidden" name="user_id_to_delete" value="{{ account[0] }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>                            
+       
+        </tr>
+        {% endfor %}
+        <!-- END: Loop through retrieved data from the database -->
+    </table>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Account Edit</title>
+</head>
+<body>
+    <h1>Account Edit</h1>
+
+    <form action="{{ url_for('updateAccount', username=account[0]) }}" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="{{ account[0] }}" readonly><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" value="{{ account[1] }}"><br><br>
+
+        <label for="staffRole">Staff Role:</label>
+        <select id="staffRole" name="staffRole">
+            <option value="admin" {% if account[2] == 'admin' %}selected{% endif %}>Admin</option>
+            <option value="staff" {% if account[2] == 'staff' %}selected{% endif %}>Staff</option>
+            <option value="user" {% if account[2] == 'user' %}selected{% endif %}>User</option>
+        </select><br><br>
+
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>
+
