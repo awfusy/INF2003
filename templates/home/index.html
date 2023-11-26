@@ -723,20 +723,49 @@
               'WHERE\n' +
               '    order_status = \'delivered\';';
             newSqlTime = '0.658390284';
-            newNosql = JSON.stringify([{
-                "$group": {
-                  "_id": "$payment_type",
-                  "count": {
-                    "$sum": 1
-                  }
-                }
-              },
-              {
-                "$sort": {
-                  "count": -1
-                }
-              }
-            ]);
+            newNosql = JSON.stringify([
+    {
+        "$match": {
+            "order_status": "delivered"
+        },
+    },
+    {
+        "$project": {
+            "order_id": 1,
+            "customer_id": 1,
+            "processing_time": {
+                "$divide": [
+                    {
+                        "$subtract": [
+                            {"$dateFromString": {"dateString": "$order_approved_at"}},
+                            {"$dateFromString": {"dateString": "$order_purchase_timestamp"}}
+                        ]
+                    },
+                    3600000
+                ]
+            },
+            "shipping_time": {
+                "$divide": [
+                    {
+                        "$subtract": [
+                            {"$dateFromString": {"dateString": "$order_delivered_customer_date"}},
+                            {"$dateFromString": {"dateString": "$order_delivered_carrier_date"}}
+                        ]
+                    },
+                    3600000
+                ]
+            }
+        }
+    },
+    {
+        "$group": {
+            "_id": None,
+            "average_processing_time": {"$avg": "$processing_time"},
+            "average_shipping_time": {"$avg": "$shipping_time"}
+        }
+    }
+]
+);
             newNosqlTime = '0.691096187';
             finalAnalysis = 'The graph reveals the on average, orders are processed in approximately 10.28 hours, and shipping takes approximately 223.93 hours. These timeframes indicate a relatively quick order processing system but an unusually long shipping duration, which might be indicative oflogistical challenges or delays in the shipping process.This tells that the store are quick however the deliver team needs to improve.';
             dynamicChartImageBase64 = '{{ q7_chart_image }}';
