@@ -568,7 +568,7 @@
               '{{ q3_chart_image }}'; // add this from app.py result to change image according to case
             break;
           case 'Query 4':
-            newText = 'Frequently Bought items';
+            newText = 'Frequently Bought Category';
             newSql = 'SELECT p.product_category_name, COUNT(oi.order_id) AS order_count\n' +
               'FROM olist_order_items_dataset oi\n' +
               'JOIN olist_products_dataset p ON oi.product_id = p.product_id\n' +
