@@ -109,7 +109,7 @@
                         Revenue DESC;
                     </span>
                     <br /><br />
-                    Average Time taken to Execute (ms): <span class="sql-time">100</span><br />
+                    Average Time taken to Execute (ms): <span class="sql-time">12.72879319</span><br />
                   </p>
                 </div>
                 <div class="card-body-nosql col-6 text-center">
@@ -135,7 +135,7 @@
                       order_items_collection.aggregate(revenue_by_cat_pipeline)
                     </span>
                     <br /><br />
-                    Average Time taken to Execute (ms):<span class="nosql-time"></span> <br />
+                    Average Time taken to Execute (ms):<span class="nosql-time">24.09248948</span> <br />
                   </p>
                 </div>
               </div>
@@ -320,7 +320,7 @@
               'ORDER BY\n' +
               '    Revenue DESC\n' +
               'LIMIT 10;';
-            newSqlTime = '100';
+            newSqlTime = '12.72879319';
             newNosql = JSON.stringify([{
                 "$lookup": {
                   "from": "products",
@@ -386,7 +386,7 @@
                 }
               }
             ]);
-            newNosqlTime = '100';
+            newNosqlTime = '24.09248948';
             finalAnalysis = 'i am alot text';
             dynamicChartImageBase64 =
               '{{ q1_chart_image }}'; // add this from app.py result to change image according to case
@@ -407,7 +407,7 @@
               'ORDER BY\n' +
               '    Num_5_star_reviews DESC\n' +
               'LIMIT 10;';
-            newSqlTime = '444';
+            newSqlTime = '1.467722082	';
             newNosql = JSON.stringify([{
                 "$match": {
                   "review_score": 5
@@ -463,7 +463,7 @@
                 "$limit": 10
               }
             ]);
-            newNosqlTime = '111';
+            newNosqlTime = '12.34308205';
             finalAnalysis = 'asdasdasdasda';
             dynamicChartImageBase64 =
               '{{ q2_chart_image }}'; // add this from app.py result to change image according to case
@@ -504,7 +504,7 @@
               '    MaxSales ON scs.state = maxSales.state AND scs.QuantitySold = maxSales.MaxQuantitySold\n' +
               'ORDER BY\n' +
               '    scs.QuantitySold DESC, scs.state;';
-            newSqlTime = '100';
+            newSqlTime = '4.648042679';
             newNosql = JSON.stringify([{
               "$lookup": {
                 "from": "orders",
@@ -562,7 +562,7 @@
                 "QuantitySold": -1
               }
             }]);
-            newNosqlTime = '100';
+            newNosqlTime = '31.64216442';
             finalAnalysis = 'i am alot text';
             dynamicChartImageBase64 =
               '{{ q3_chart_image }}'; // add this from app.py result to change image according to case
@@ -574,7 +574,7 @@
               'JOIN olist_products_dataset p ON oi.product_id = p.product_id\n' +
               'GROUP BY p.product_category_name\n' +
               'ORDER BY order_count DESC;';
-            newSqlTime = '902.8';
+            newSqlTime = '1.552112222';
             newNosql = JSON.stringify([{
                 "$lookup": {
                   "from": "order_items",
@@ -623,7 +623,7 @@
               }
             ]);
 
-            newNosqlTime = '100';
+            newNosqlTime = '21.11927412';
             finalAnalysis = 'i am alot text';
             dynamicChartImageBase64 = '{{ q4_chart_image }}';
             break;
@@ -647,7 +647,7 @@
               'ORDER BY\n' +
               '    TotalRevenue DESC\n' +
               'LIMIT 10;';
-            newSqlTime = '100';
+            newSqlTime = '2.725741863';
             newNosql = JSON.stringify(
               [
   {"$lookup": {"from": "orders", "localField": "customer_id", "foreignField": "customer_id", "as": "orders"}},
@@ -672,7 +672,7 @@
   {"$sort": {"total_revenue": -1}}
 ]
             );
-            newNosqlTime = '100';
+            newNosqlTime = '18.03590686';
             finalAnalysis = 'i am alot text';
             dynamicChartImageBase64 = '{{ q5_chart_image }}';
             break;
@@ -682,7 +682,7 @@
               'FROM olist_order_payments_dataset\n' +
               'GROUP BY payment_type\n' +
               'ORDER BY payment_count DESC;';
-            newSqlTime = '437';
+            newSqlTime = '0.706213713';
             newNosql = JSON.stringify([
                     {"$group": {
                         "_id": "$payment_type",
@@ -691,7 +691,7 @@
                     {"$sort": {"count": -1}}
                 ]
                 );
-            newNosqlTime = '100';
+            newNosqlTime = '0.07446835';
             finalAnalysis = 'i am alot text';
             dynamicChartImageBase64 = '{{ q6_chart_image }}';
             break;
@@ -704,7 +704,7 @@
               '    olist_db.olist_orders_dataset\n' +
               'WHERE\n' +
               '    order_status = \'delivered\';';
-            newSqlTime = '100';
+            newSqlTime = '0.658390284';
             newNosql = JSON.stringify([{
                 "$group": {
                   "_id": "$payment_type",
@@ -719,7 +719,7 @@
                 }
               }
             ]);
-            newNosqlTime = '100';
+            newNosqlTime = '0.691096187';
             finalAnalysis = 'i am alot text';
             dynamicChartImageBase64 = '{{ q7_chart_image }}';
             break;
@@ -738,7 +738,7 @@
               'WHERE O.order_status = \'delivered\'\n' +
               'GROUP BY OI.order_id\n' +
               ') AS subquery;';
-            newSqlTime = '1054.8';
+            newSqlTime = '0.658390284	';
             newNosql = JSON.stringify([{
                 "$lookup": {
                   "from": "orders",
@@ -801,7 +801,7 @@
                 }
               }
             ]);
-            newNosqlTime = '100';
+            newNosqlTime = '11.17903755';
             finalAnalysis = 'i am alot text';
             dynamicChartImageBase64 = '{{ q8_chart_image }}';
             break;
@@ -818,7 +818,7 @@
               '    P.product_category_name\n' +
               'ORDER BY\n' +
               '    average DESC;';
-            newSqlTime = '100';
+            newSqlTime = '1.767537451	';
             newNosql = JSON.stringify([{
                 '$lookup': {
                   'from': 'order_items',
@@ -875,7 +875,7 @@
                 }
               }
             ]);
-            newNosqlTime = '100';
+            newNosqlTime = '21.21219943';
             finalAnalysis = 'i am alot text';
             dynamicChartImageBase64 = '{{ q9_chart_image }}';
             break;
@@ -893,7 +893,7 @@
               'ORDER BY\n' +
               '    COUNT(DISTINCT S.seller_id) DESC\n' +
               'LIMIT 10;';
-            newSqlTime = '100';
+            newSqlTime = '2.341468263	';
             newNosql = JSON.stringify([{
                 '$project': {
                   'seller_id': 1,
@@ -932,7 +932,7 @@
                 }
               }
             ]);
-            newNosqlTime = '100';
+            newNosqlTime = '21.4140605';
             finalAnalysis = 'i am alot text';
             dynamicChartImageBase64 = '{{ q10_chart_image }}';
             break;
