@@ -428,11 +428,15 @@ def index():
 
             # Query 4: Frequently Bought items
             q4_query = """
-                SELECT p.product_category_name, COUNT(oi.order_id) AS order_count
-                FROM olist_order_items_dataset oi
-                JOIN olist_products_dataset p ON oi.product_id = p.product_id
-                GROUP BY p.product_category_name
-                ORDER BY order_count DESC;
+                SELECT p.product_category_name AS product_category_name,
+                COUNT(oi.order_id) AS order_count
+                FROM olist_db.olist_order_items_dataset oi
+                JOIN olist_db.olist_products_dataset p ON oi.product_id = p.product_id
+                GROUP BY
+                p.product_category_name
+                ORDER BY
+                order_count DESC;
+
             """
             q4_df = pd.read_sql_query(q4_query, connection)
             q4_chart_labels = q4_df['product_category_name'].tolist()
