@@ -167,6 +167,10 @@ def updateAccount():
         new_username = request.form.get('username')
         new_password = request.form.get('password')
         new_staff_role = request.form.get('staffRole')
+        print(new_userid)
+        print(new_username)
+        print(new_password)
+        print(new_staff_role)
 
         # SSH Configuration
         ssh_host = '35.212.230.135'
